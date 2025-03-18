@@ -33,6 +33,14 @@
         <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>utils</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <finalName>ROOT</finalName>
         <plugins>

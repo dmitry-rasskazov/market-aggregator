@@ -1,4 +1,4 @@
-package tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.support;
+package tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.entities.support;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

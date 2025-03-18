@@ -1,8 +1,8 @@
-package tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence;
+package tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.support.ProductImageId;
+import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.entities.support.ProductImageId;
 
 import java.io.Serializable;
 
