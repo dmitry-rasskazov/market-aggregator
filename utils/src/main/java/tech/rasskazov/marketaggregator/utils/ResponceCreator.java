@@ -3,7 +3,7 @@ package tech.rasskazov.marketaggregator.utils;
 import jakarta.ws.rs.core.Response;
 import tech.rasskazov.marketaggregator.utils.generated.model.ResultResponse;
 
-public class MapperService
+public class ResponceCreator
 {
     public <X> Response createSuccessResponse(X responseDto)
     {

@@ -2,33 +2,32 @@ package tech.rasskazov.marketaggregator.dataaccesssubsystem.api.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Specializes;
-import jakarta.inject.Inject;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
+import lombok.extern.slf4j.Slf4j;
 import tech.rasskazov.marketaggregator.dataaccesssubsystem.generated.api.NotFoundException;
 import tech.rasskazov.marketaggregator.dataaccesssubsystem.generated.api.impl.ProductApiServiceImpl;
-import tech.rasskazov.marketaggregator.dataaccesssubsystem.generated.model.Product;
-import tech.rasskazov.marketaggregator.utils.MapperService;
 
 @ApplicationScoped
 @Specializes
+@Slf4j
 public class ProductApiService extends ProductApiServiceImpl
 {
-    private final MapperService responseCreator;
+    private static final String DATA_MANAGEMENT_PRODUCT_URL = "http://data-management-subsystem:8080/api/product";
 
-    @Inject
-    public ProductApiService(MapperService responseCreator)
+    private final Client client;
+
+    public ProductApiService()
     {
-        this.responseCreator = responseCreator;
+        this.client = ClientBuilder.newClient();
     }
 
     @Override
     public Response productGet(String productId, SecurityContext securityContext) throws NotFoundException
     {
-        try {
-            return this.responseCreator.createSuccessResponse(new Product());
-        } catch (Exception exception) {
-            return this.responseCreator.createInternalServerError("ProductId is incorrect");
-        }
+        log.info("Test: " + productId);
+        return this.client.target(DATA_MANAGEMENT_PRODUCT_URL).queryParam("productId", productId).request().get();
     }
 }

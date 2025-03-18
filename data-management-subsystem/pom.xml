@@ -21,7 +21,7 @@
     <groupId>tech.rasskazov</groupId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-    <groupId>tech.rassakzov.market-aggregator</groupId>
+    <groupId>tech.rasskazov.market-aggregator</groupId>
     <artifactId>data-management-subsystem</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
@@ -61,6 +61,12 @@
             <groupId>jakarta.inject</groupId>
             <artifactId>jakarta.inject-api</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>utils</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

@@ -1,10 +1,12 @@
 package tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.repo;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.entities.Feedback;
 
 import java.util.Optional;
 import java.util.UUID;
 
+@ApplicationScoped
 public class FeedbackRepository extends AbstractRepository<Feedback, UUID>
 {
     public Optional<Feedback> findByProductIdAndEmail(UUID productId, String email)
