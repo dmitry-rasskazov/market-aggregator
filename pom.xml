@@ -38,6 +38,7 @@
     <module>information-parsing-subsystem</module>
     <module>resource-adaptations-subsystem</module>
     <module>data-access-subsystem</module>
+    <module>utils</module>
   </modules>
 
   <packaging>pom</packaging>

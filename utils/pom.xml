@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>market-aggregator</artifactId>
+    <groupId>tech.rasskazov</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <groupId>tech.rasskazov.market-aggregator</groupId>
+  <artifactId>utils</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+
+  <name>utils</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <packaging>jar</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>${version.penapi.generator.maven.plugin}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>
+                ${project.basedir}/../openapi.yaml
+              </inputSpec>
+              <generatorName>jaxrs-resteasy</generatorName>
+              <modelPackage>tech.rasskazov.marketaggregator.utils.generated.model</modelPackage>
+              <configOptions>
+                <generateModels>true</generateModels>
+                <generateApis>false</generateApis>
+                <useJakartaEe>true</useJakartaEe>
+                <modelNamePrefix>Generated</modelNamePrefix>
+              </configOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

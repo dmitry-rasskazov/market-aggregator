@@ -1,4 +1,4 @@
-package tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence;
+package tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.entities;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;

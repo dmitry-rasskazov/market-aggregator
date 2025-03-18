@@ -1,16 +1,13 @@
-package tech.rasskazov.marketaggregator.dataaccesssubsystem.api;
+package tech.rasskazov.marketaggregator.utils;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.core.Response;
-import tech.rasskazov.marketaggregator.dataaccesssubsystem.generated.model.Product;
-import tech.rasskazov.marketaggregator.dataaccesssubsystem.generated.model.ResultResponse;
+import tech.rasskazov.marketaggregator.utils.generated.model.ResultResponse;
 
-@ApplicationScoped
 public class MapperService
 {
-    public Response createSuccessResponse()
+    public <X> Response createSuccessResponse(X responseDto)
     {
-        return this.creeateResponse(Response.Status.OK, new Product());
+        return this.creeateResponse(Response.Status.OK, responseDto);
     }
 
     public Response createInternalServerError(String message)
