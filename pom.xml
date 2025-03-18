@@ -27,6 +27,10 @@
     <version.failsafe.plugin>3.5.2</version.failsafe.plugin>
 
     <version.war.plugin>3.4.0</version.war.plugin>
+
+    <version.build.helper.maven.plugin>3.3.0</version.build.helper.maven.plugin>
+
+    <version.penapi.generator.maven.plugin>7.12.0</version.penapi.generator.maven.plugin>
   </properties>
 
   <modules>
@@ -315,7 +319,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.3.0</version>
+        <version>${version.build.helper.maven.plugin}</version>
         <executions>
           <execution>
             <id>add-generated-sources</id>

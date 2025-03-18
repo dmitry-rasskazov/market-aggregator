@@ -1,0 +1,14 @@
+.graphWrapper {
+  width: 100%;
+  max-width: 953px;
+  height: 333px;
+  position: relative;
+  font-family: Inter, sans-serif;
+}
+
+@media (max-width: 960px) {
+  .graphWrapper {
+    padding: 0 20px;
+  }
+}
+

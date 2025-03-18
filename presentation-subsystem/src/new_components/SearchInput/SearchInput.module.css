@@ -1,0 +1,20 @@
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 15px;
+  background-image: url('https://dashboard.codeparrot.ai/api/image/Z9k3GyppvFKitUWL/base-inpu.png');
+  background-size: cover;
+  border-radius: 10px;
+}
+
+.input {
+  width: 100%;
+}
+
+.searchIcon {
+  width: 24px;
+  height: 24px;
+}

@@ -42,14 +42,9 @@ public class Product implements Serializable
 
     private String link;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "product_image",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "image_id")
-    )
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     @OrderColumn(name = "serial_number")
-    private Collection<Image> images;
+    private Collection<ProductImage> images;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
     private Collection<Feedback> feedback;

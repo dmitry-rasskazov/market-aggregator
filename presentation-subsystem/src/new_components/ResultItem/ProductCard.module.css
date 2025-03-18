@@ -1,0 +1,97 @@
+.container {
+  display: flex;
+  padding: 10px;
+  gap: 20px;
+  width: 937px;
+  background: #ffffff;
+}
+
+.shortPriceBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 202px;
+}
+
+.productImage {
+  width: 202px;
+  height: 153px;
+  object-fit: cover;
+}
+
+.price {
+  font-family: Inter, sans-serif;
+  font-size: 24px;
+  color: #141620;
+  padding: 6px 0 0 30px;
+}
+
+.nameDescription {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 715px;
+}
+
+.title {
+  font-family: Inter, sans-serif;
+  font-size: 24px;
+  color: #1c3474;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.description {
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  color: #000000;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.ratingContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.productRating {
+  display: flex;
+  gap: 5px;
+}
+
+.vendorRating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.largeStar {
+  width: 20px;
+  height: 19px;
+}
+
+.smallStar {
+  width: 9px;
+  height: 8.6px;
+}
+
+.vendorName {
+  font-family: Inter, sans-serif;
+  font-size: 15px;
+  color: #000000;
+}
+
+.title:hover {
+  color: #2c4a9e;
+}
+
+.productImage:hover {
+  opacity: 0.9;
+}

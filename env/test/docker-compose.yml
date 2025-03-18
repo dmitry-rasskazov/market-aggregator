@@ -1,0 +1,38 @@
+name: "market-aggregator-test"
+
+volumes:
+  database:
+
+services:
+  data-access-subsystem:
+    build:
+      context: ../../
+      target: data-access-subsystem
+
+  data-management-subsystem:
+    build:
+      context: ../../
+      target: data-management-subsystem
+
+  information-parsing-subsystem:
+    build:
+      context: ../../
+      target: information-parsing-subsystem
+
+  resource-adaptations-subsystem:
+    build:
+      context: ../../
+      target: resource-adaptations-subsystem
+
+  database:
+    image: postgres:latest
+    volumes:
+      - database:/var/lib/postgresql/data
+    ports:
+      - 5432
+
+  ingress:
+    image: nginx:latest
+    volumes:
+      - ./nginx/test.conf:/etc/nginx/conf.d/default.conf
+      - ./certs:/etc/nginx/certs/

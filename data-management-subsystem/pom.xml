@@ -45,25 +45,56 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>jakarta.validation</groupId>
-            <artifactId>jakarta.validation-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>6.2.7.Final</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>2.3.232</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
     <build>
         <finalName>ROOT</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${version.penapi.generator.maven.plugin}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/openapi.yaml
+                            </inputSpec>
+                            <generatorName>jaxrs-resteasy</generatorName>
+                            <invokerPackage>tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.invoker</invokerPackage>
+                            <apiPackage>tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.api</apiPackage>
+                            <modelPackage>tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model</modelPackage>
+                            <configOptions>
+                                <generateModels>true</generateModels>
+                                <generateApis>true</generateApis>
+                                <useJakartaEe>true</useJakartaEe>
+                                <modelNamePrefix>Generated</modelNamePrefix>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 </project>

@@ -1,0 +1,17 @@
+.statisticsInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: 390px;
+  padding: 0 7.47px;
+  align-items: center;
+}
+
+.infoText {
+  font-family: Inter, sans-serif;
+  font-size: 14.94px;
+  font-weight: 400;
+  color: #1C3474;
+  text-align: center;
+}
+
