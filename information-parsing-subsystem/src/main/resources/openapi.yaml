@@ -1,0 +1,257 @@
+openapi: 3.0.1
+info:
+  title: Data access subsystem
+  description: Application for tracking store inventory
+  version: "1.0.0"
+servers:
+  - url: /api
+paths:
+  /search:
+    get:
+      parameters:
+        - in: path
+          name: text
+          schema:
+            type: string
+          required: false
+          description: Search string
+        - in: path
+          name: filters
+          required: false
+          description: Filtering
+          schema:
+            type: string
+        - in: path
+          name: sort
+          required: false
+          description: Sorting
+          schema:
+            type: string
+        - in: path
+          name: page
+          required: false
+          description: Pagination
+          schema:
+            type: integer
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                oneOf:
+                  - $ref: '#/components/schemas/ResultResponse'
+        "400":
+          description: BAD REQUEST
+          content:
+            application/json:
+              schema:
+                type: object
+                oneOf:
+                  - $ref: '#/components/schemas/ResultResponse'
+  /product:
+    get:
+      parameters:
+        - in: path
+          name: productId
+          schema:
+            type: string
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                oneOf:
+                  - $ref: '#/components/schemas/ResultResponse'
+        "400":
+          description: BAD REQUEST
+          content:
+            application/json:
+              schema:
+                type: object
+                oneOf:
+                  - $ref: '#/components/schemas/ResultResponse'
+
+components:
+  schemas:
+    ResultResponse:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+        errorMessage:
+          type: string
+        result:
+          type: object
+          nullable: true
+          oneOf:
+            - $ref: '#/components/schemas/Product'
+            - $ref: '#/components/schemas/SearchResultList'
+
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        category:
+          type: object
+          oneOf:
+            - $ref: '#/components/schemas/Category'
+        vendor:
+          type: object
+          oneOf:
+            - $ref: '#/components/schemas/Vendor'
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: integer
+        quantity:
+          type: integer
+        saledQuantity:
+          type: integer
+        characteristics:
+          type: array
+          items:
+            $ref: '#/components/schemas/Characteristic'
+        rating:
+          type: integer
+        link:
+          type: string
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/Image'
+        feedback:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feedback'
+
+    SearchResultList:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: object
+          oneOf:
+            - $ref: '#/components/schemas/Pagination'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShortProduct'
+
+    ShortProduct:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: integer
+        quantity:
+          type: integer
+        image:
+          type: object
+          oneOf:
+            - $ref: '#/components/schemas/Image'
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+
+    Vendor:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        link:
+          type: string
+          nullable: true
+        image:
+          type: object
+          nullable: true
+          oneOf:
+            - $ref: '#/components/schemas/Image'
+
+    Characteristic:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        measurement:
+          type: string
+          nullable: true
+
+    Image:
+      type: object
+      properties:
+        id:
+          type: string
+        link:
+          type: string
+
+    Feedback:
+      type: object
+      properties:
+        id:
+          type: string
+        fullName:
+          type: string
+        description:
+          type: string
+
+    Filter:
+      type: object
+      properties:
+        field:
+          type: string
+        filterType:
+          type: string
+          enum:
+            - EQUAL
+            - BETWEEN
+            - LESS
+            - GREAT
+        values:
+          type: object
+
+    Sort:
+      type: object
+      properties:
+        field:
+          type: string
+        sortDirection:
+          type: string
+          enum:
+            - ASC
+            - DESC
+        values:
+          type: object
+
+    Pagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+          minimum: 0
+          maximum: 15
+        offset:
+          type: integer
+          minimum: 0

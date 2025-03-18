@@ -1,0 +1,11 @@
+.mainMenu {
+    display: flex;
+    flex-direction: column;
+    width: 223px;
+    height: auto;
+    gap: 20px;
+    background-color: #ffffff;
+    padding: 10px;
+    box-sizing: border-box;
+}
+

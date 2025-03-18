@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    JBoss, Home of Professional Open Source
+    Copyright 2015, Red Hat, Inc. and/or its affiliates, and individual
+    contributors by the @authors tag. See the copyright.txt in the
+    distribution for a full listing of individual contributors.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+--><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+    <artifactId>market-aggregator</artifactId>
+    <groupId>tech.rasskazov</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+    <groupId>tech.rasskazov.market-aggregator</groupId>
+    <artifactId>data-access-subsystem</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <packaging>war</packaging>
+    <name>data-access-subsystem</name>
+    <description>Подсистема доступа к данным</description>
+
+    <properties>
+        <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <finalName>ROOT</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${version.penapi.generator.maven.plugin}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/openapi.yaml
+                            </inputSpec>
+                            <generatorName>jaxrs-resteasy</generatorName>
+                            <invokerPackage>tech.rasskazov.marketaggregator.dataaccesssubsystem.generated.invoker</invokerPackage>
+                            <apiPackage>tech.rasskazov.marketaggregator.dataaccesssubsystem.generated.api</apiPackage>
+                            <modelPackage>tech.rasskazov.marketaggregator.dataaccesssubsystem.generated.model</modelPackage>
+                            <configOptions>
+                                <generateModels>true</generateModels>
+                                <generateApis>true</generateApis>
+                                <useJakartaEe>true</useJakartaEe>
+                                <modelNamePrefix>Generated</modelNamePrefix>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

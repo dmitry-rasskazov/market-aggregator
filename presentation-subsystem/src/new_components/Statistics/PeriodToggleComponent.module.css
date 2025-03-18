@@ -1,0 +1,51 @@
+.periodToggle {
+  display: flex;
+  flex-direction: row;
+  gap: 14.94px;
+  min-width: 400px;
+  height: 18px;
+  padding: 0 7.47px;
+  justify-content: center;
+}
+
+.periodButton {
+  color: #1C3474;
+  font-family: 'Inter', sans-serif;
+  font-size: 14.94px;
+  font-weight: 400;
+  transition: opacity 0.2s ease;
+}
+
+.periodButton:hover {
+  opacity: 0.8;
+}
+
+.selected {
+  font-weight: 600;
+}
+
+/* Ensure text content fits */
+.periodButton:nth-child(1) { /* всё */
+  min-width: 26px;
+}
+
+.periodButton:nth-child(2) { /* 1 год */
+  min-width: 39px;
+}
+
+.periodButton:nth-child(3) { /* 6 месяцев */
+  min-width: 77px;
+}
+
+.periodButton:nth-child(4) { /* 1 месяц */
+  min-width: 58px;
+}
+
+.periodButton:nth-child(5) { /* 1 неделя */
+  min-width: 64px;
+}
+
+.periodButton:nth-child(6) { /* 1 день */
+  min-width: 47px;
+}
+

@@ -1,0 +1,36 @@
+.statisticsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 953px;
+  height: auto;
+  background-color: #ffffff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  align-items: center;
+}
+
+.periodToggleTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-left: 7.47px;
+  padding-right: 7.47px;
+  margin-bottom: 10px;
+}
+
+.graphContainer {
+  flex-grow: 1;
+  height: auto;
+  width: 100%;
+  max-width: 953px;
+  margin-bottom: 10px;
+}
+
+.statisticsInfoBottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-left: 7.47px;
+  padding-right: 7.47px;
+}
+

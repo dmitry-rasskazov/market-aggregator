@@ -1,0 +1,39 @@
+/* Layout.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.logo {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+  color: #1c3474;
+}
+
+.menuIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.searchInput {
+  flex-grow: 1;
+  margin: 20px;
+}
+
+.resultList {
+  flex-grow: 1;
+  margin: 20px;
+}
+

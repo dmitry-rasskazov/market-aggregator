@@ -1,0 +1,53 @@
+.pagination {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 380px;
+    width: 100%;
+    max-width: 954px;
+    background-color: #ffffff;
+}
+
+.numbers {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.pageNumber {
+    font-family: Inter, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #1C284A;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    min-width: 12px;
+    height: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.pageNumber:hover {
+    color: #0056b3;
+}
+
+.pageNumber.active {
+    font-weight: 600;
+    color: #0056b3;
+}
+
+.ellipsis {
+    font-family: Inter, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #1C284A;
+    height: 29px;
+    display: flex;
+    align-items: center;
+}
+
