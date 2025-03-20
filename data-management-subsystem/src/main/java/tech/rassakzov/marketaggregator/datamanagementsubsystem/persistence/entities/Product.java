@@ -3,10 +3,13 @@ package tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.enti
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Map;
 import java.util.UUID;
 
 @Entity
@@ -32,11 +35,14 @@ public class Product implements Serializable
 
     private int price;
 
+    private String measurement;
+
     private int quantity;
 
     private int saledQuantity;
 
-    private String characteristics;
+    @JdbcTypeCode(SqlTypes.JSON)
+    private Map<String, Object> characteristics;
 
     private int rating;
 

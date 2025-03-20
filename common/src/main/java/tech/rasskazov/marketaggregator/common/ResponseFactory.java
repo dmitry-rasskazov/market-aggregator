@@ -1,9 +1,9 @@
-package tech.rasskazov.marketaggregator.utils;
+package tech.rasskazov.marketaggregator.common;
 
 import jakarta.ws.rs.core.Response;
-import tech.rasskazov.marketaggregator.utils.generated.model.ResultResponse;
+import tech.rasskazov.marketaggregator.common.generated.model.ResultResponse;
 
-public class MapperService
+public class ResponseFactory
 {
     public <X> Response createSuccessResponse(X responseDto)
     {

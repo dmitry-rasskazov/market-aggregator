@@ -1,13 +1,13 @@
 package tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.repo;
 
-import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 import java.util.Optional;
 
 public abstract class AbstractRepository<T, K>
 {
-    @Inject
+    @PersistenceContext
     protected EntityManager em;
 
     public Optional<T> findById(K id)
@@ -31,6 +31,11 @@ public abstract class AbstractRepository<T, K>
         } else {
             this.em.merge(entity);
         }
+    }
+
+    public void create()
+    {
+
     }
 
     protected abstract Class<T> getEntityClass();

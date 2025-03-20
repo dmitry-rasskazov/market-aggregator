@@ -7,8 +7,10 @@ import jakarta.ws.rs.core.SecurityContext;
 import lombok.extern.slf4j.Slf4j;
 import tech.rassakzov.marketaggregator.datamanagementsubsystem.api.MapperService;
 import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.repo.FeedbackRepository;
+import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.repo.ProductRepository;
 import tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.api.impl.FeedbackApiServiceImpl;
 import tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.Feedback;
+import tech.rasskazov.marketaggregator.common.ResponseFactory;
 
 import java.util.UUID;
 
@@ -20,28 +22,43 @@ public class FeedbackApiService extends FeedbackApiServiceImpl
     private FeedbackRepository feedbackRepository;
 
     @Inject
+    private ProductRepository productRepository;
+
+    @Inject
+    private ResponseFactory responceCreator;
+
+    @Inject
     private MapperService mapperService;
 
     @Override
     public Response feedbackPost(Feedback feedback, SecurityContext securityContext)
     {
         try {
-            var storedFeedback = this.feedbackRepository.findByProductIdAndEmail(UUID.fromString(feedback.getProductId()), feedback.getEmail());
+            var productId = UUID.fromString(feedback.getProductId());
+            var product = this.productRepository.findById(productId);
+
+            if(product.isEmpty()) {
+                return this.responceCreator.createBadRequestError("ProductId is incorrect!");
+            }
+
+            var storedFeedback = this.feedbackRepository.findByProductIdAndEmail(productId, feedback.getEmail());
 
             if(storedFeedback.isEmpty()) {
                 var entity = this.mapperService.feedbackToEntity(feedback);
+                entity.setProduct(product.get());
+                entity.setId(UUID.randomUUID());
 
                 this.feedbackRepository.save(entity);
 
                 feedback.setId(entity.getId().toString());
             } else {
-                return this.mapperService.createBadRequestError("Feedback already exist!");
+                return this.responceCreator.createBadRequestError("Feedback already exist!");
             }
         } catch (Exception exception) {
             log.error(exception.getMessage(), exception);
-            return this.mapperService.createInternalServerError("Failed store feedback");
+            return this.responceCreator.createInternalServerError("Failed store feedback");
         }
 
-        return this.mapperService.createSuccessResponse(feedback);
+        return this.responceCreator.createSuccessResponse(feedback);
     }
 }

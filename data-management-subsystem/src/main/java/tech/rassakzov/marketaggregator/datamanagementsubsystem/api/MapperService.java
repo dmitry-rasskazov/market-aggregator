@@ -1,45 +1,114 @@
 package tech.rassakzov.marketaggregator.datamanagementsubsystem.api;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.ws.rs.core.Response;
-import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.entities.Feedback;
-import tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.ResultResponse;
+import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.entities.*;
+
+import java.util.List;
+import java.util.Map;
 
 @ApplicationScoped
 public class MapperService
 {
+    public Product productToEntity(tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.Product product)
+    {
+        var entity = new Product();
+
+        entity.setCategory(this.categoryToEntity(product.getCategory()));
+        entity.setVendor(this.vendorToEntity(product.getVendor()));
+        entity.setName(product.getName());
+        entity.setDescription(product.getDescription());
+        entity.setPrice(product.getPrice());
+        entity.setMeasurement(product.getMeasurement());
+        entity.setQuantity(product.getQuantity());
+        entity.setSaledQuantity(product.getSaledQuantity());
+        entity.setCharacteristics(this.characteristicsToMap(product.getCharacteristics()));
+        entity.setRating(product.getRating());
+        entity.setLink(product.getLink());
+        entity.setImages(product.getImages().stream().map(this::imageToEntity).toList());
+
+        return entity;
+    }
+
+    public tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.Product productToApiModel(Product entity)
+    {
+        var product = new tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.Product();
+
+        product.setId(entity.getId().toString());
+        product.setCategory(this.categoryToApiModel(entity.getCategory()));
+        product.setVendor(this.vendorToApiModel(entity.getVendor()));
+        product.setName(entity.getName());
+        product.setDescription(entity.getDescription());
+        product.setPrice(entity.getPrice());
+        product.setMeasurement(entity.getMeasurement());
+        product.setQuantity(entity.getQuantity());
+        product.setSaledQuantity(entity.getSaledQuantity());
+        product.setRating(entity.getRating());
+        product.setLink(entity.getLink());
+        product.setImages(entity.getImages().stream().map(this::imageToApiModel).toList());
+
+        return product;
+    }
+
+
     public Feedback feedbackToEntity(tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.Feedback feedback)
     {
         var result = new Feedback();
 
+        result.setEmail(feedback.getEmail());
+        result.setDescription(feedback.getDescription());
+        result.setFullName(feedback.getFullName());
+
+        return result;
+    }
+
+    public tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.Feedback feedbackToApiModel(Feedback feedback)
+    {
+        var result = new tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.Feedback();
+
+        result.setId(feedback.getId().toString());
+        result.setFullName(feedback.getFullName());
+        result.setDescription(feedback.getDescription());
+
+        return result;
+    }
+
+    public Category categoryToEntity(tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.ProductCategory category)
+    {
         return null;
     }
 
-    public <X> Response createSuccessResponse(X object)
+    public Vendor vendorToEntity(tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.ProductVendor vendor)
     {
-        return this.creeateResponse(Response.Status.OK, object);
+        return null;
     }
 
-    public Response createInternalServerError(String message)
+    public Map<String, Object> characteristicsToMap(List<tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.Characteristic> characteristics)
     {
-        var result =  new ResultResponse();
-        result.setErrorCode(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-        result.setErrorMessage(message);
-
-        return this.creeateResponse(Response.Status.INTERNAL_SERVER_ERROR, result);
+        return null;
     }
 
-    public Response createBadRequestError(String message)
+    public ProductImage imageToEntity(tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.Image image)
     {
-        var result =  new ResultResponse();
-        result.setErrorCode(Response.Status.BAD_REQUEST.getStatusCode());
-        result.setErrorMessage(message);
-
-        return this.creeateResponse(Response.Status.BAD_REQUEST, result);
+        return null;
     }
 
-    private Response creeateResponse(Response.Status status, Object entity)
+    public tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.ProductCategory categoryToApiModel(Category category)
     {
-        return Response.status(status).entity(entity).build();
+        return null;
+    }
+
+    public tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.ProductVendor vendorToApiModel(Vendor vendor)
+    {
+        return null;
+    }
+
+    public List<String> characteristicsToString(Map<String, Object> characteristicsMap)
+    {
+        return null;
+    }
+
+    public tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.Image imageToApiModel( ProductImage image)
+    {
+        return null;
     }
 }

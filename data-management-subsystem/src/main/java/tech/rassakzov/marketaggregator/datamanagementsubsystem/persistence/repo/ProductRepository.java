@@ -8,11 +8,24 @@ import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.suppo
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @ApplicationScoped
 public class ProductRepository extends AbstractRepository<Product, UUID>
 {
+    public Optional<Product> findBySourceId(String sourceId)
+    {
+        return Optional.ofNullable(this.em.createQuery("SELECT p" +
+                " FROM Product p " +
+                "inner join p.category " +
+                "inner join p.vendor " +
+                "inner join p.images" +
+                " WHERE p.sourceId = :sourceId", Product.class)
+                .setParameter("sourceId", sourceId)
+                .getSingleResult());
+    }
+
     public Collection<Product> findBySearchAndFiltersAndSorting(String text, List<Filter> filters, List<Sort> sorts, Pagination pagination)
     {
         Collection<Product> results;
