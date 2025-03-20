@@ -39,6 +39,10 @@ public class ProductApiService extends ProductApiServiceImpl
     @Override
     public Response productGet(String productId, SecurityContext securityContext)
     {
+        if(null == productId) {
+            return this.responseFactory.createBadRequestError("Product ID is required.");
+        }
+
         try {
             return this.responseFactory.createSuccessResponse(
                     this.productRepository.findById(UUID.fromString(productId))
@@ -55,6 +59,16 @@ public class ProductApiService extends ProductApiServiceImpl
     public Response productPost(tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.Product product, SecurityContext securityContext)
     {
         try {
+            var entity = this.mapperService.productToEntity(product);
+
+            this.productRepository.findBySourceId(product.getSourceId())
+                    .ifPresentOrElse((p) -> {
+
+
+                        product.setId(p.getId().toString());
+                        this.productRepository.update(entity);
+                    }, () -> this.productRepository.create(entity);
+
             return this.responseFactory.createSuccessResponse(new ResultResponse());
         } catch (Exception exception) {
             log.error(exception.getMessage(), exception);

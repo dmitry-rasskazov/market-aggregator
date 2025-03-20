@@ -4,9 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.net.URI;
 
+import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.MediaType;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.junit.jupiter.api.Test;
@@ -20,17 +21,40 @@ import org.junit.jupiter.api.extension.ExtendWith;
 public class DataManagementSubsystemIT {
 
     @Test
-    public void testHelloEndpoint() {
+    public void testSuccessGetProduct() {
         try (Client client = ClientBuilder.newClient()) {
             Response response = client
-                    .target(URI.create("http://localhost:8080/"))
-                    .path("/hello/World")
-                    .request()
+                    .target(URI.create("http://localhost:8080/api/product"))
+                    .queryParam("productId", "2abc2908-3225-4d61-a1d3-48d5aef185e3")
+                    .request(MediaType.APPLICATION_JSON_TYPE)
                     .get();
 
             assertEquals(200, response.getStatus());
-            assertEquals("Hello 'World'.", response.readEntity(String.class));
+        }
+    }
 
+    @Test
+    public void testBadGetProduct() {
+        try (Client client = ClientBuilder.newClient()) {
+            Response response = client
+                    .target(URI.create("http://localhost:8080/api/product"))
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .get();
+
+            assertEquals(400, response.getStatus());
+        }
+    }
+
+    @Test
+    public void testFailedGetProduct() {
+        try (Client client = ClientBuilder.newClient()) {
+            Response response = client
+                    .target(URI.create("http://localhost:8080/api/product"))
+                    .queryParam("productId", "3225-4d61-a1d3-48d5aef185e3")
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .get();
+
+            assertEquals(500, response.getStatus());
         }
     }
 }

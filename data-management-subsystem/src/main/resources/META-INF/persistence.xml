@@ -1,6 +1,6 @@
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              version="2.2">
-    <persistence-unit name="h2-persistence-unit">
+    <persistence-unit name="postgresql-persistence-unit">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
 

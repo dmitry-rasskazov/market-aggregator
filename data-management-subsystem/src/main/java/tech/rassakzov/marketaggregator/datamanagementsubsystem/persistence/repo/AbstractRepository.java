@@ -33,6 +33,11 @@ public abstract class AbstractRepository<T, K>
         }
     }
 
+    public void create()
+    {
+
+    }
+
     protected abstract Class<T> getEntityClass();
 
     protected abstract K getKey(T entity);
