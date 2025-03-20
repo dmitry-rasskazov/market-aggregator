@@ -9,25 +9,25 @@ paths:
   /search:
     get:
       parameters:
-        - in: path
+        - in: query
           name: text
           schema:
             type: string
           required: false
           description: Search string
-        - in: path
+        - in: query
           name: filters
           required: false
           description: Filtering
           schema:
             type: string
-        - in: path
+        - in: query
           name: sort
           required: false
           description: Sorting
           schema:
             type: string
-        - in: path
+        - in: query
           name: limit
           required: false
           description: Pagination
@@ -35,7 +35,7 @@ paths:
             type: integer
             minimum: 0
             maximum: 15
-        - in: path
+        - in: query
           name: offset
           required: false
           description: Pagination
@@ -72,7 +72,7 @@ paths:
   /product:
     get:
       parameters:
-        - in: path
+        - in: query
           name: productId
           schema:
             type: string

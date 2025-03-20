@@ -10,7 +10,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
 import tech.rasskazov.marketaggregator.dataaccesssubsystem.generated.api.impl.FeedbackApiServiceImpl;
 import tech.rasskazov.marketaggregator.dataaccesssubsystem.generated.model.Feedback;
-import tech.rasskazov.marketaggregator.utils.ResponceCreator;
+import tech.rasskazov.marketaggregator.common.ResponseFactory;
 
 @Specializes
 public class FeedbackApiService extends FeedbackApiServiceImpl
@@ -20,7 +20,7 @@ public class FeedbackApiService extends FeedbackApiServiceImpl
     private final Client client;
 
     @Inject
-    public FeedbackApiService(ResponceCreator mapperService)
+    public FeedbackApiService(ResponseFactory mapperService)
     {
         this.client = ClientBuilder.newClient();
     }

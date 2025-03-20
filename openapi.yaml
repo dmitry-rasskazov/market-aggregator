@@ -205,6 +205,8 @@ components:
           type: string
         price:
           type: integer
+        measurement:
+          type: string
         quantity:
           type: integer
         saledQuantity:

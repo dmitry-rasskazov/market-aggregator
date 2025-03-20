@@ -5,11 +5,12 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
 import lombok.extern.slf4j.Slf4j;
+import tech.rassakzov.marketaggregator.datamanagementsubsystem.api.MapperService;
 import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.repo.FeedbackRepository;
 import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.repo.ProductRepository;
 import tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.api.impl.FeedbackApiServiceImpl;
 import tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.Feedback;
-import tech.rasskazov.marketaggregator.utils.ResponceCreator;
+import tech.rasskazov.marketaggregator.common.ResponseFactory;
 
 import java.util.UUID;
 
@@ -24,7 +25,7 @@ public class FeedbackApiService extends FeedbackApiServiceImpl
     private ProductRepository productRepository;
 
     @Inject
-    private ResponceCreator responceCreator;
+    private ResponseFactory responceCreator;
 
     @Inject
     private MapperService mapperService;
