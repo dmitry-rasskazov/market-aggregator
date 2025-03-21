@@ -1,5 +1,6 @@
 package tech.rassakzov.marketaggregator.datamanagementsubsystem.api.service;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Specializes;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
@@ -15,6 +16,7 @@ import tech.rasskazov.marketaggregator.common.ResponseFactory;
 import java.util.UUID;
 
 @Specializes
+@ApplicationScoped
 @Slf4j
 public class FeedbackApiService extends FeedbackApiServiceImpl
 {

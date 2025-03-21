@@ -33,9 +33,14 @@ public abstract class AbstractRepository<T, K>
         }
     }
 
-    public void create()
+    public void create(T entity)
     {
+        this.em.persist(entity);
+    }
 
+    public void update(T entity)
+    {
+        this.em.merge(entity);
     }
 
     protected abstract Class<T> getEntityClass();

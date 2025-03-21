@@ -251,7 +251,6 @@
       <artifactId>slf4j-simple</artifactId>
       <version>2.0.17</version>
     </dependency>
-
   </dependencies>
 
   <build>
@@ -338,5 +337,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>
