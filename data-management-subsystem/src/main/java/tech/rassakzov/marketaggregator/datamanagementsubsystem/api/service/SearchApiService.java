@@ -36,17 +36,19 @@ public class SearchApiService extends tech.rasskazov.marketaggregator.datamanage
     public Response searchGet(String text, String filters, String sorts, Integer limit, Integer offset, SecurityContext securityContext)
     {
         try {
-            return this.responseFactory.createSuccessResponse(
-                    this.productRepository.findBySearchAndFiltersAndSorting(
-                                    text,
-                                    this.mapperService.parseFilters(filters),
-                                    this.mapperService.parseSorts(sorts),
-                                    this.mapperService.parsePagination(limit, offset)
-                            )
-                            .stream()
-                            .map(this.mapperService::productToApiModel)
-                            .toList()
-            );
+            var result = new tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.ResultResponse();
+
+            result.setResult(this.productRepository.findBySearchAndFiltersAndSorting(
+                            text,
+                            this.mapperService.parseFilters(filters),
+                            this.mapperService.parseSorts(sorts),
+                            this.mapperService.parsePagination(limit, offset)
+                    )
+                    .stream()
+                    .map(this.mapperService::productToApiModel)
+                    .toList());
+
+            return this.responseFactory.createSuccessResponse(result);
         } catch (Exception exception) {
             log.error(exception.getMessage(), exception);
             return this.responseFactory.createInternalServerError("Search failed.");
