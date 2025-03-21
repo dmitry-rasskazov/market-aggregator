@@ -1,9 +1,11 @@
 package tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.repo;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.entities.Archive;
 
 import java.util.UUID;
 
+@ApplicationScoped
 public class ArchiveRepository extends AbstractRepository<Archive, UUID>
 {
     @Override

@@ -57,4 +57,45 @@ public class DataManagementSubsystemIT {
             assertEquals(500, response.getStatus());
         }
     }
+
+    @Test
+    public void testSuccessSearch() {
+        try (Client client = ClientBuilder.newClient()) {
+            Response response = client
+                    .target(URI.create("http://localhost:8080/api/search"))
+                    .queryParam("text", "Поисковой запрос")
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .get();
+
+            assertEquals(200, response.getStatus());
+        }
+    }
+
+    @Test
+    public void testSuccessSearchWithFilter() {
+        try (Client client = ClientBuilder.newClient()) {
+            Response response = client
+                    .target(URI.create("http://localhost:8080/api/search"))
+                    .queryParam("text", "Поисковой запрос")
+                    .queryParam("filters", "filter1,filter2")
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .get();
+
+            assertEquals(200, response.getStatus());
+        }
+    }
+
+    @Test
+    public void testSuccessSearchWithSort() {
+        try (Client client = ClientBuilder.newClient()) {
+            Response response = client
+                    .target(URI.create("http://localhost:8080/api/search"))
+                    .queryParam("text", "Поисковой запрос")
+                    .queryParam("sorts", "sort1,sort2")
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .get();
+
+            assertEquals(200, response.getStatus());
+        }
+    }
 }
