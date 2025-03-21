@@ -11,7 +11,7 @@
   <artifactId>common</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
-  <name>utils</name>
+  <name>common</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -36,6 +36,7 @@
               </inputSpec>
               <generatorName>jaxrs-resteasy</generatorName>
               <modelPackage>tech.rasskazov.marketaggregator.common.generated.model</modelPackage>
+              <apiPackage>tech.rasskazov.marketaggregator.common.generated.api</apiPackage>
               <configOptions>
                 <generateModels>true</generateModels>
                 <generateApis>false</generateApis>

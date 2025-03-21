@@ -2,9 +2,13 @@ package tech.rassakzov.marketaggregator.datamanagementsubsystem.api;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.entities.*;
+import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.support.Filter;
+import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.support.Pagination;
+import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.support.Sort;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @ApplicationScoped
 public class MapperService
@@ -13,6 +17,7 @@ public class MapperService
     {
         var entity = new Product();
 
+        entity.setId(UUID.randomUUID());
         entity.setCategory(this.categoryToEntity(product.getCategory()));
         entity.setVendor(this.vendorToEntity(product.getVendor()));
         entity.setName(product.getName());
@@ -54,6 +59,7 @@ public class MapperService
     {
         var result = new Feedback();
 
+        result.setId(UUID.randomUUID());
         result.setEmail(feedback.getEmail());
         result.setDescription(feedback.getDescription());
         result.setFullName(feedback.getFullName());
@@ -108,6 +114,21 @@ public class MapperService
     }
 
     public tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.Image imageToApiModel( ProductImage image)
+    {
+        return null;
+    }
+
+    public List<Filter> parseFilters(String filters)
+    {
+        return null;
+    }
+
+    public List<Sort> parseSorts(String filters)
+    {
+        return null;
+    }
+
+    public Pagination parsePagination(Integer limit, Integer offset)
     {
         return null;
     }

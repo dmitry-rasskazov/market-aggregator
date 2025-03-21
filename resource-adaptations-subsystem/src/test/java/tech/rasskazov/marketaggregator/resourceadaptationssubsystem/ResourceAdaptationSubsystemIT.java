@@ -17,20 +17,32 @@ import org.junit.jupiter.api.extension.ExtendWith;
  */
 @RunAsClient
 @ExtendWith(ArquillianExtension.class)
-public class GettingStartedApplicationIT {
-
+public class ResourceAdaptationSubsystemIT
+{
     @Test
-    public void testHelloEndpoint() {
+    public void testProductList() {
         try (Client client = ClientBuilder.newClient()) {
             Response response = client
-                    .target(URI.create("http://localhost:8080/"))
-                    .path("/hello/World")
+                    .target(URI.create("http://localhost:8080/api"))
+                    .path("/product/list")
                     .request()
                     .get();
 
             assertEquals(200, response.getStatus());
-            assertEquals("Hello 'World'.", response.readEntity(String.class));
+        }
+    }
 
+    @Test
+    public void testSingleProduct() {
+        try (Client client = ClientBuilder.newClient()) {
+            Response response = client
+                    .target(URI.create("http://localhost:8080/api"))
+                    .path("/product")
+                    .queryParam("sourceId", "2abc2908-3225-4d61-a1d3-48d5aef185e3")
+                    .request()
+                    .get();
+
+            assertEquals(200, response.getStatus());
         }
     }
 }

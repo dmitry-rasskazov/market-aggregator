@@ -33,4 +33,36 @@
         <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
     </properties>
 
+    <build>
+        <finalName>ROOT</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${version.penapi.generator.maven.plugin}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/openapi.yaml
+                            </inputSpec>
+                            <generatorName>jaxrs-resteasy</generatorName>
+                            <invokerPackage>tech.rasskazov.marketaggregator.resourceadaptationssubsystem.generated.invoker</invokerPackage>
+                            <apiPackage>tech.rasskazov.marketaggregator.resourceadaptationssubsystem.generated.api</apiPackage>
+                            <modelPackage>tech.rasskazov.marketaggregator.resourceadaptationssubsystem.generated.model</modelPackage>
+                            <configOptions>
+                                <generateModels>true</generateModels>
+                                <generateApis>true</generateApis>
+                                <useJakartaEe>true</useJakartaEe>
+                                <modelNamePrefix>Generated</modelNamePrefix>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

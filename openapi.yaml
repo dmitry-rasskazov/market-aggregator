@@ -199,6 +199,8 @@ components:
           type: object
           oneOf:
             - $ref: '#/components/schemas/Vendor'
+        sourceId:
+          type: string
         name:
           type: string
         description:
@@ -227,6 +229,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Feedback'
+
+    ProductList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
 
     SearchResultList:
       type: object

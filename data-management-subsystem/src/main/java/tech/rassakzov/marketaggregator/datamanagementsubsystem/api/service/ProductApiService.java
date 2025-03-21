@@ -8,10 +8,13 @@ import jakarta.ws.rs.core.SecurityContext;
 import lombok.extern.slf4j.Slf4j;
 import tech.rassakzov.marketaggregator.datamanagementsubsystem.api.MapperService;
 import tech.rassakzov.marketaggregator.datamanagementsubsystem.component.ResponseFactory;
+import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.entities.Archive;
+import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.repo.ArchiveRepository;
 import tech.rassakzov.marketaggregator.datamanagementsubsystem.persistence.repo.ProductRepository;
 import tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.api.impl.ProductApiServiceImpl;
 import tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.ResultResponse;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Slf4j
@@ -21,6 +24,8 @@ public class ProductApiService extends ProductApiServiceImpl
 {
     private final ProductRepository productRepository;
 
+    private final ArchiveRepository archiveRepository;
+
     private final ResponseFactory responseFactory;
 
     private final MapperService mapperService;
@@ -28,10 +33,12 @@ public class ProductApiService extends ProductApiServiceImpl
     @Inject
     public ProductApiService(
             ProductRepository productRepository,
+            ArchiveRepository archiveRepository,
             ResponseFactory responseFactory,
             MapperService mapperService
     ) {
         this.productRepository = productRepository;
+        this.archiveRepository = archiveRepository;
         this.responseFactory = responseFactory;
         this.mapperService = mapperService;
     }
@@ -61,18 +68,43 @@ public class ProductApiService extends ProductApiServiceImpl
         try {
             var entity = this.mapperService.productToEntity(product);
 
+            Archive archive = this.createArchive(product);
             this.productRepository.findBySourceId(product.getSourceId())
-                    .ifPresentOrElse((p) -> {
+                    .ifPresentOrElse((storedProduct) -> {
+                        storedProduct.setQuantity(product.getQuantity());
+                        storedProduct.setSaledQuantity(product.getSaledQuantity());
+                        storedProduct.setPrice(product.getPrice());
+                        storedProduct.setName(product.getName());
+                        storedProduct.setDescription(product.getDescription());
+                        storedProduct.setImages(entity.getImages());
 
+                        archive.setProduct(storedProduct);
 
-                        product.setId(p.getId().toString());
-                        this.productRepository.update(entity);
-                    }, () -> this.productRepository.create(entity);
+                        this.productRepository.update(storedProduct);
+                    }, () -> {
+                        this.productRepository.create(entity);
+                        archive.setProduct(entity);
+                    });
+
+            this.archiveRepository.create(archive);
 
             return this.responseFactory.createSuccessResponse(new ResultResponse());
         } catch (Exception exception) {
             log.error(exception.getMessage(), exception);
             return this.responseFactory.createBadRequestError("Fail mutation product!");
         }
+    }
+
+    private Archive createArchive(tech.rasskazov.marketaggregator.datamanagementsubsystem.generated.model.Product product)
+    {
+        var archive = new Archive();
+
+        archive.setId(UUID.randomUUID());
+        archive.setPrice(product.getPrice());
+        archive.setAvailableQuantity(product.getQuantity());
+        archive.setSaledQuantity(product.getSaledQuantity());
+        archive.setTimeStamp(LocalDateTime.now());
+
+        return archive;
     }
 }
