@@ -25,9 +25,10 @@ public class ResourcePollingService
         try {
             var resourceAdaptationSubsystemTarget = this.client.target(DATA_MANAGEMENT_FEEDBACK_URL);
 
-            Response response = resourceAdaptationSubsystemTarget.path("productList").request(MediaType.APPLICATION_JSON_TYPE).get();
-
-            response.getEntity();
+            Response response = resourceAdaptationSubsystemTarget
+                    .path("productList")
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .get();
         } catch (Exception exception) {
             log.error(exception.getMessage(), exception);
         }
