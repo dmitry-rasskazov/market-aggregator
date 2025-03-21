@@ -181,10 +181,6 @@ components:
         result:
           type: object
           nullable: true
-          oneOf:
-            - $ref: '#/components/schemas/Product'
-            - $ref: '#/components/schemas/SearchResultList'
-            - $ref: '#/components/schemas/Feedback'
 
     Product:
       type: object

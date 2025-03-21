@@ -13,7 +13,6 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import tech.rasskazov.marketaggregator.dataaccesssubsystem.generated.model.Product;
 
 /**
  * Run integration tests against the server and the deployed application.
