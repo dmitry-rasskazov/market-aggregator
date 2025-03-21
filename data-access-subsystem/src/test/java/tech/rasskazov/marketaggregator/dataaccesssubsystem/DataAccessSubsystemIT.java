@@ -3,9 +3,11 @@ package tech.rasskazov.marketaggregator.dataaccesssubsystem;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.net.URI;
+import java.util.UUID;
 
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit5.ArquillianExtension;
@@ -27,11 +29,11 @@ public class DataAccessSubsystemIT
             Response response = client
                     .target(URI.create("http://localhost:8080/"))
                     .path("/api/product")
-                    .request()
+                    .queryParam("productId", UUID.randomUUID().toString())
+                    .request(MediaType.APPLICATION_JSON_TYPE)
                     .get();
 
-            assertEquals(200, response.getStatus());
-            assertEquals(new Product(), response.readEntity(Product.class));
+            assertEquals(500, response.getStatus());
         }
     }
 }

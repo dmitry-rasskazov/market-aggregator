@@ -1,7 +1,7 @@
 package tech.rasskazov.marketaggregator.dataaccesssubsystem.api.service;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Specializes;
-import jakarta.inject.Inject;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
@@ -14,6 +14,7 @@ import tech.rasskazov.marketaggregator.dataaccesssubsystem.generated.model.Feedb
 
 import java.util.UUID;
 
+@ApplicationScoped
 @Specializes
 public class FeedbackApiService extends FeedbackApiServiceImpl
 {
@@ -21,7 +22,6 @@ public class FeedbackApiService extends FeedbackApiServiceImpl
 
     private final Client client;
 
-    @Inject
     public FeedbackApiService()
     {
         this.client = ClientBuilder.newClient();
