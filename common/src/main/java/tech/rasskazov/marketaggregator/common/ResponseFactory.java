@@ -1,5 +1,6 @@
 package tech.rasskazov.marketaggregator.common;
 
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import tech.rasskazov.marketaggregator.common.generated.model.ResultResponse;
 
@@ -30,6 +31,6 @@ public class ResponseFactory
 
     private Response creeateResponse(Response.Status status, Object entity)
     {
-        return Response.status(status).entity(entity).build();
+        return Response.status(status).entity(entity).type(MediaType.APPLICATION_JSON_TYPE).build();
     }
 }
