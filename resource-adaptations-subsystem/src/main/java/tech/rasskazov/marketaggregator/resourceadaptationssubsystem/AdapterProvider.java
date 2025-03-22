@@ -1,12 +1,14 @@
 package tech.rasskazov.marketaggregator.resourceadaptationssubsystem;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import lombok.NoArgsConstructor;
 import tech.rasskazov.marketaggregator.resourceadaptationssubsystem.generated.model.Product;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
 
+@NoArgsConstructor
 @ApplicationScoped
 public class AdapterProvider
 {
