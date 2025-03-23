@@ -11,7 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 @ApplicationScoped
 public class ResourcePollingService
 {
-    private static final String DATA_MANAGEMENT_FEEDBACK_URL = "http://resource-adaptations-subsystem:8080/api";
+    private static final String RESOURCE_ADAPTATION_SUBSYSTEM_URL = "http://resource-adaptations-subsystem:8080/api";
+
+    private static final String DATA_MANAGEMENT_SUBSYSTEM_URL = "http://resource-adaptations-subsystem:8080/api";
 
     private final Client client;
 
@@ -23,7 +25,7 @@ public class ResourcePollingService
     public void resourcePull()
     {
         try {
-            var resourceAdaptationSubsystemTarget = this.client.target(DATA_MANAGEMENT_FEEDBACK_URL);
+            var resourceAdaptationSubsystemTarget = this.client.target(RESOURCE_ADAPTATION_SUBSYSTEM_URL);
 
             Response response = resourceAdaptationSubsystemTarget
                     .path("productList")
